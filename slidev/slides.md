@@ -1,6 +1,6 @@
 ---
 # You can also start simply with 'default'
-theme: seriph
+theme: default
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
@@ -25,9 +25,9 @@ mdc: true
 #  ogImage: https://cover.sli.dev
 ---
 
-# Welcome to Slidev
+# Lua
 
-Presentation slides for developers
+Presentation by Andreas Affentranger & Rafael Uttinger
 
 <div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
   Press Space for next page <carbon:arrow-right />
@@ -42,33 +42,29 @@ Presentation slides for developers
   </a>
 </div>
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
 ---
-transition: fade-out
+transition: slide-left
 ---
 
-# What is Slidev?
+# The Language
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+- Portuguese for moon
+- Designed by members of the _Tecgraf_ department @ Pontifical Catholic University of Rio de Janeiro
+- Initial Release: 1993
+- Latest Stable Release: v5.4.7 - June 2024
+- Compiles to bytecode & runs on the lua interpreter
+- Extremly lightweight (offical v5.4.7 tarball weights in at just 1.3MB!)
+- Common fields of application: Game Development, Embedded Systems, Plugin Ecosystems
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
+  <br>
+  <br>
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+Read more about [Lua Docs](https://www.lua.org/home.html)
 
 <!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
+- Lua Interpreter in ca. 31K Lines C geschrieben
+- Für Performance kriterische Anwendungen auch unabhängige LuaJIT Implementation
+- Anwendungsbeispiele: Gamdevelopment - WoW Modding, Embedded Systems - Router, Plugin Ecosystems - Adobe Illustrator, NeoVim
 -->
 
 <style>
@@ -83,36 +79,20 @@ h1 {
 }
 </style>
 
+---
+transition: slide-left
+---
+
+# Language Concepts
+- Lua is dynamically typed
+- Lua is Multi-Paradigm - Imperative (Procedural, Objectoriented), Functional
+- Lua uses "Mechanism over Policies" 
+- In Lua (almost) everything is a table
+- Lua is cool 😄
+
 <!--
-Here is another comment.
+Mechanisms over Policies -> Wenig Keywords aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
 -->
-
----
-transition: slide-up
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
-
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
 
 ---
 layout: two-cols
