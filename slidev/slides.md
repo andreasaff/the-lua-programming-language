@@ -5,7 +5,7 @@ theme: default
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
 # some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: Introduction to Lua
 info: |
   ## Slidev Starter Template
   Presentation slides for developers.
@@ -86,13 +86,172 @@ transition: slide-left
 # Language Concepts
 - Lua is dynamically typed
 - Lua is Multi-Paradigm - Imperative (Procedural, Objectoriented), Functional
-- Lua uses "Mechanism over Policies" 
-- In Lua (almost) everything is a table
+- Lua uses "Mechanisms over Policies" 
+- In Lua the only complex datatype is a table - everything is derived from there
 - Lua is cool 😄
 
 <!--
-Mechanisms over Policies -> Wenig Keywords aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
+Mechanisms over Policies -> Wenig Keywords (nur 21) aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
 -->
+
+---
+transition: slide-left
+---
+# Basics
+
+Simple Literals
+```lua {0|1|1-4|1-6|1-8|all}
+local number = 5
+
+local string = "hello world!"
+local single = 'also a valid string'
+
+local truth, lies = true, false
+
+local table = {}
+
+local emptiness = nil
+```
+Functions are first class citizen
+```lua {0|1-3|all}
+function greet(x)
+  print("Hello," .. name)
+end
+
+local sayHello = greet
+sayHello("Alice")
+```
+
+---
+transition: slide-left
+---
+# Table
+In Lua <span v-mark.red="1">tables are the only complex datatype.</span> Array, Dictionary & Object all in one.
+
+Array
+```lua {0|1|1-2|all}
+local array = {"first", 2, false, function() print("Fourth!") end }
+print("Oh-yeah 1-based indexes!:", list[1])
+print("Fourth is:" list[4]())
+```
+
+Map
+```lua {0|1-4|1-5|all}
+local map = {
+  literal_key = "a string",
+  ["an expression"] = "also works"
+}
+print("literal_key :", t.literal_key)
+print("an expression", t.["an expression"])
+```
+
+---
+transition: slide-left
+---
+Stack (Object)
+```lua
+```
+
+---
+transition: slide-left
+---
+# Metatables & Metamethods
+Metamethods override the default behaviour of tables.
+
+```lua
+va = {1, 2, 4}
+vb = {2, 4, 3}
+va + vb
+```
+
+Defining the vector addition 
+```lua
+local vec_ad_mt = {}
+vec_add_mt._add = function(left, right)
+  return setmetatable({
+    left[1] + right[1],
+    left[2] + right[2],
+    left[3] + right[3],
+  }, vec_add_mt)
+end
+
+local va = setmetatable({ 1, 2, 4}, vec_add_mt)
+local vb = setmetatable({ 2, 4, 3}, vec_add_mt)
+
+local vr = va + vb
+print(vr[1], vr[2], vr[3])
+```
+---
+transition: slide-left
+---
+Recursive Fibbonaci calculation with caching
+```lua
+local fib_mt = {
+  _index = function(self, key)
+    if key <= 2 then return 1 end
+    -- cache fib values
+    self[key] = self[key -2] + self[key - 1]
+    -- return current fib
+    return self[key]
+  end
+}
+
+local fib = setmetatable({}, fib_mt)
+
+print(fib[5])
+print(fib[100])
+```
+
+---
+transition: slide-left
+---
+# Coroutines
+Lua uses Coroutines as it's concurrency model.
+Everything is executed on a single Hardware Thread. 
+
+Coroutines can `yield` (voluntarily pause) there execution (non-preemtive multithreading), giving the illusion of true parallelism.
+
+Coroutines can be in one of three states:
+- suspended
+- running
+- dead
+
+```lua
+co = coroutine.create(function ()
+  for i=1,10 do 
+    print("co value", i)
+    coroutine.yield()
+  end
+end)
+
+print(co)
+print(coroutine.status(co))
+```
+---
+transition: slide-left
+---
+# Summary & Conclusion
+
+---
+transition: slide-left
+---
+# Personal Conculusion Rafael 
+
+---
+transition: slide-left
+---
+# Personal Conculusion Andreas
+
+---
+transition: slide-left
+layout: center
+class: text-center
+---
+# Thanks for joining us along the ride!
+
+[GitHub](https://github.com/andreasaff/the-lua-programming-language)
+
+<PoweredBySlidev mt-10 />
 
 ---
 layout: two-cols
@@ -560,7 +719,7 @@ Double-click on the draggable elements to edit their positions.
 </v-drag>
 ```
 
-<v-drag pos="663,206,261,_,-15">
+<v-drag pos="652,199,261,_,-15">
   <div text-center text-3xl border border-main rounded>
     Double-click me!
   </div>
