@@ -114,8 +114,8 @@ local emptiness = nil
 ```
 Functions are first class citizen
 ```lua {0|1-3|all}
-function greet(x)
-  print("Hello," .. name)
+function greet(name)
+  print("Hello, " .. name "!")
 end
 
 local sayHello = greet
@@ -131,8 +131,8 @@ In Lua <span v-mark.red="1">tables are the only complex datatype.</span> Array, 
 Array
 ```lua {0|1|1-2|all}
 local array = {"first", 2, false, function() print("Fourth!") end }
-print("Oh-yeah 1-based indexes!:", list[1])
-print("Fourth is:" list[4]())
+print("Oh-yeah 1-based indexes!:", array[1])
+print("Fourth is:", array[4]())
 ```
 
 Map
@@ -141,15 +141,61 @@ local map = {
   literal_key = "a string",
   ["an expression"] = "also works"
 }
-print("literal_key :", t.literal_key)
-print("an expression", t.["an expression"])
+print("literal_key :", map.literal_key)
+print("an expression", map["an expression"])
 ```
 
 ---
 transition: slide-left
 ---
 Stack (Object)
-```lua
+```lua{*}{maxHeight:'405px'}
+Stack = {}
+
+function Stack:init()
+    local s = {}
+    setmetatable(s, self)
+    self.__index = self
+    return s
+end 
+
+function Stack:push(v)
+    table.insert(self, v)
+end
+
+function Stack:pop()
+    return table.remove(self)
+end
+
+function Stack:top()
+    return self[#self]
+end
+
+function Stack:isEmpty()
+    return #self == 0
+end
+
+function Stack:size()
+    return #self
+end
+
+function Stack:print()
+    print(table.unpack(self))
+end
+
+s = Stack:init()
+print("size:", s:size())
+print("isEmpty", s:isEmpty())
+s:print()
+print("top:", s:top())
+
+s:push(42)
+s:push(77)
+s:push(1)
+
+print("size:", s:size())
+print("isEmpty", s:isEmpty())
+s:print()
 ```
 
 ---
@@ -161,13 +207,13 @@ Metamethods override the default behaviour of tables.
 ```lua
 va = {1, 2, 4}
 vb = {2, 4, 3}
-va + vb
+local vr = va + vb
 ```
 
 Defining the vector addition 
 ```lua
-local vec_ad_mt = {}
-vec_add_mt._add = function(left, right)
+local vec_add_mt = {}
+vec_add_mt.__add = function(left, right)
   return setmetatable({
     left[1] + right[1],
     left[2] + right[2],
@@ -175,10 +221,10 @@ vec_add_mt._add = function(left, right)
   }, vec_add_mt)
 end
 
-local va = setmetatable({ 1, 2, 4}, vec_add_mt)
-local vb = setmetatable({ 2, 4, 3}, vec_add_mt)
+local vc = setmetatable({ 1, 2, 4}, vec_add_mt)
+local vd = setmetatable({ 2, 4, 3}, vec_add_mt)
 
-local vr = va + vb
+local vr = vc + vd
 print(vr[1], vr[2], vr[3])
 ```
 ---
@@ -187,9 +233,9 @@ transition: slide-left
 Recursive Fibbonaci calculation with caching
 ```lua
 local fib_mt = {
-  _index = function(self, key)
+  __index = function(self, key)
     if key <= 2 then return 1 end
-    -- cache fib values
+    -- calculate new fib values from already cached ones
     self[key] = self[key -2] + self[key - 1]
     -- return current fib
     return self[key]
@@ -218,7 +264,7 @@ Coroutines can be in one of three states:
 
 ```lua
 co = coroutine.create(function ()
-  for i=1,10 do 
+  for i=1,2 do 
     print("co value", i)
     coroutine.yield()
   end
@@ -226,6 +272,10 @@ end)
 
 print(co)
 print(coroutine.status(co))
+coroutine.resume(co)
+print("123 from the main thread")
+coroutine.resume(co)
+coroutine.status(co)
 ```
 ---
 transition: slide-left
