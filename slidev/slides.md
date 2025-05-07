@@ -291,6 +291,11 @@ transition: slide-left
 transition: slide-left
 ---
 # Personal Conculusion Andreas
+- Practical language that quite simple 
+- Working with one datastructure that represents everything is quite interessting
+- Will definitly use it again (Neovim config)
+- Maybe also thinker around with Lua during next AoC
+- Lua manual gets you up and running quite fast (https://www.lua.org/manual/5.4/)
 
 ---
 transition: slide-left
