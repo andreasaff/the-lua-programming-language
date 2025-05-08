@@ -1,0 +1,44 @@
+name: Build Report PDF
+
+on:
+  push:
+    paths:
+      - '**/*.tex'
+      - '**/*.bib'
+      - '**/*.sty'
+      - 'report/Makefile'
+      - '.github/workflows/latex.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt install -y \
+            texlive-base \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            latexmk \
+            lmodern
+
+      - name: Build PDF with Makefile
+        run: make -C report
+
+      - name: Push PDF to pdf branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git fetch
+          git switch --force-create pdf origin/pdf
+          git add report/main.pdf
+          git commit -m "Update PDF report" || echo "No changes to commit"
+          git push origin pdf

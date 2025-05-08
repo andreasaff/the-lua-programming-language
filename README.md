@@ -53,7 +53,10 @@ _Requirements_
 
 - pdfTeX 3.141592653-2.6-1.40.26 or higher
 
-> tbd
+Generate the pdf file locally:
+```bash
+make -C report
+```
 
 ### NixOS
 
