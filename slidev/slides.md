@@ -113,9 +113,9 @@ local table = {}
 local emptiness = nil
 ```
 Functions are first class citizen
-```lua {0|1-3|all}
+```lua {monaco-run}
 function greet(name)
-  print("Hello, " .. name "!")
+  print("Hello, " .. name .. "!")
 end
 
 local sayHello = greet
@@ -129,14 +129,14 @@ transition: slide-left
 In Lua <span v-mark.red="1">tables are the only complex datatype.</span> Array, Dictionary & Object all in one.
 
 Array
-```lua {0|1|1-2|all}
+```lua {monaco-run}
 local array = {"first", 2, false, function() print("Fourth!") end }
 print("Oh-yeah 1-based indexes!:", array[1])
 print("Fourth is:", array[4]())
 ```
 
 Map
-```lua {0|1-4|1-5|all}
+```lua {monaco-run}
 local map = {
   literal_key = "a string",
   ["an expression"] = "also works"
@@ -149,7 +149,7 @@ print("an expression", map["an expression"])
 transition: slide-left
 ---
 Stack (Object)
-```lua{*}{maxHeight:'405px'}
+```lua {monaco-run}
 Stack = {}
 
 function Stack:init()
@@ -204,14 +204,14 @@ transition: slide-left
 # Metatables & Metamethods
 Metamethods override the default behaviour of tables.
 
-```lua
+```lua {monaco-run}
 va = {1, 2, 4}
 vb = {2, 4, 3}
 local vr = va + vb
 ```
 
 Defining the vector addition 
-```lua
+```lua {monaco-run}
 local vec_add_mt = {}
 vec_add_mt.__add = function(left, right)
   return setmetatable({
@@ -231,7 +231,7 @@ print(vr[1], vr[2], vr[3])
 transition: slide-left
 ---
 Recursive Fibbonaci calculation with caching
-```lua
+```lua {monaco-run}
 local fib_mt = {
   __index = function(self, key)
     if key <= 2 then return 1 end
@@ -262,7 +262,7 @@ Coroutines can be in one of three states:
 - running
 - dead
 
-```lua
+```lua {monaco-run}
 co = coroutine.create(function ()
   for i=1,2 do 
     print("co value", i)

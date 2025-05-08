@@ -45,6 +45,13 @@ cd slidev
 yarn run dev
 ```
 
+To directly run code snippets in the slides via monaco-run, start the lua-server
+
+```bash
+cd slidev/setup
+lua lua_server.lua
+```
+
 Slides are served on http://localhost:3030
 
 ### Report
