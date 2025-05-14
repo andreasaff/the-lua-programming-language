@@ -1,3 +1,12 @@
 # dev env
 .direnv
 .envrc
+
+# LaTeX files
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out
+report/*.pdf
+report/*.toc
