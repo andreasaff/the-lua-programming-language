@@ -10,3 +10,6 @@ report/*.log
 report/*.out
 report/*.pdf
 report/*.toc
+report/*.synctex.gz
+report/*.fdb_latexmk
+report/*.fls
