@@ -126,7 +126,7 @@ sayHello("Alice")
 transition: slide-left
 ---
 # Table
-In Lua <span v-mark.red="1">tables are the only complex datatype.</span> Array, Dictionary & Object all in one.
+In Lua <span v-mark.red="1">tables are the only complex datatype</span>. Array, Dictionary & Object all in one.
 
 Array
 ```lua {monaco-run}
@@ -285,16 +285,21 @@ transition: slide-left
 ---
 transition: slide-left
 ---
-# Personal Conculusion Rafael 
+# Personal Conclusion Rafael
+- Language is well-documented and actively maintained
+- Easy to understand core concepts
+- Established within its domain as lightweight extension language
+- Might use it again for scripting purposes like add-ons or configs
+- Limitations are minor and understandable given its use case and minimalist philosophy
 
 ---
 transition: slide-left
 ---
-# Personal Conculusion Andreas
-- Practical language that quite simple 
-- Working with one datastructure that represents everything is quite interessting
+# Personal Conclusion Andreas
+- Practical language that's quite simple 
+- Working with one datastructure that represents everything is quite interesting
 - Will definitly use it again (Neovim config)
-- Maybe also thinker around with Lua during next AoC
+- Maybe also tinker around with Lua during next AoC
 - Lua manual gets you up and running quite fast (https://www.lua.org/manual/5.4/)
 
 ---

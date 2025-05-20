@@ -1,8 +1,36 @@
--- Code from the # Table slides
 -- Array
+-- 1. Beispiel: Array mit Konstruktor
 local array = {"first", 2, false, function() print("Fourth!") end }
-print("Oh-yeah 1-based indexes!:", array[1])
-print("Fourth is:", array[4]())
+print("1-based indexes!:", array[1])
+print("Fourth is:")
+array[4]()
+
+-- 2. Beispiel: Array mit 1000 Elementen (initiiert mit 0)
+a = {}    -- new array
+    for i=1, 1000 do
+      a[i] = 0
+    end
+
+-- Dictionary
+-- Beispiel: Mapping von Länder zu Städte
+local capitals = {
+    Germany = "Berlin",
+    France = "Paris",
+    Italy = "Rome"
+  }
+  
+print("Capital of France is " .. capitals["France"])
+
+-- Set
+-- Beispiel: Mengen-Darstellung mit Tabelle
+local fruits = {
+    apple = true,
+    banana = true,
+    cherry = true
+  }
+  
+  print("Is apple in the set?", fruits["apple"] ~= nil)   -- true
+  print("Is orange in the set?", fruits["orange"] ~= nil) -- false
 
 -- Map
 local map = {
@@ -12,7 +40,7 @@ local map = {
 print("literal_key :", map.literal_key)
 print("an expression", map["an expression"])
 
--- Stack (a object)
+-- Stack (an object)
 Stack = {}
 
 function Stack:init()
