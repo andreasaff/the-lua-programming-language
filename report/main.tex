@@ -12,6 +12,7 @@
 \usepackage{geometry}
 \usepackage{parskip}
 \usepackage{url}
+\usepackage{xcolor}
 
 \geometry{margin=2.5cm}
 
@@ -43,7 +44,7 @@
 
 \section*{Einleitung}
 
-Lua (\textit{Mond} auf portugiesisch) ist eine dynamisch typisierte Skriptsprache, welche 1993 an der Pontifical Catholic University of Rio de Janeiro veröffentlicht und seither kontinuierlich weiterentwickelt wurde. Aktuell rangiert Lua auf Platz 33 des TIOBE Index. Bekannt wurde die Sprache für ihre Erweiterbarkeit und Portabilität.
+Lua (\textit{Mond} auf Portugiesisch) ist eine dynamisch typisierte Skriptsprache, welche 1993 an der Pontifical Catholic University of Rio de Janeiro veröffentlicht und seither kontinuierlich weiterentwickelt wurde. Aktuell rangiert Lua auf Platz 33 des TIOBE Index. Bekannt wurde die Sprache für ihre Erweiterbarkeit und Portabilität.
 
 \subsection*{LuaRocks}
 
@@ -53,14 +54,14 @@ Ein zentraler Index dieser \textit{rocks} findet sich unter: \url{https://luaroc
 
 \section*{Konzepte \& Paradigmen}
 
-Dadurch, dass Lua eine Erweiterungsprogrammiersprache ist, gibt es keine Form von \textit{main}-Programm. Stattdessen funktioniert Lua \textit{embedded} in einem host client.
-Lua Source Code wird mittels dem \texttt{luac} Compiler in Bytecode kompiliert und durch den \texttt{lua} Interpreter interpretiert. Für Applikationen mit erhöhtem Perfomance Bedarf existiert ein unabhängiger LuaJIT Compiler.
+Dadurch, dass Lua eine Erweiterungsprogrammiersprache ist, gibt es keine Form von \textit{Main}-Programm. Stattdessen funktioniert Lua \textit{embedded} in einem Host-Client.
+Lua Source Code wird mittels \texttt{luac} Compiler in Bytecode kompiliert und durch den \texttt{lua} Interpreter interpretiert. Für Applikationen mit erhöhtem Performance-Bedarf existiert ein unabhängiger LuaJIT Compiler.
 
 Lua bietet gute Unterstützung für objektorientierte, funktionale, sowie datengesteuerte Programmierung und ist somit eine multiparadigmatische Programmiersprache.
 
-\subsection*{Leichtgewichtigkeit, Embedding \& Anwendungsbereich}
+\subsection*{Leichtgewichtigkeit, Einbettung \& Anwendungsbereich}
 
-Lua wurde mit dem Ziel entworfen, eine schlanke und leicht einbettbare Sprache zu sein. Dies zeigt sich unter anderem daran, dass Lua 5.4 lediglich 22 reservierte Keywords umfasst:
+Lua wurde mit dem Ziel entworfen, eine schlanke und leicht einzubettende Sprache zu sein. Dies zeigt sich unter anderem daran, dass Lua 5.4 lediglich 22 reservierte Keywords umfasst:
 
 \begin{lstlisting}
 and	break	do	else	elseif	end
@@ -70,21 +71,22 @@ true	until	while	function
 \end{lstlisting}
 
 Die Philosophie der Sprache besagt dabei, dass nur elementare Bausteine als Keywords angeboten werden sollen. Komplexere Konstrukte können aus diesen Bausteinen kombinatorisch erzeugt werden. Die Leichtgewichtigkeit zeigt sich auch im Source Code von Lua. Insgesamt besteht dieser aus rund 31’000 Linien C. Der gesamte Lua 5.4.7 tarball wiegt unkomprimiert 1.3 MB.
+
 Lua ist eine embedded Sprache sie verfügt über eine gut dokumentierte C API, integriert aber auch mit C++, Java C\# und vielen weiteren Sprachen. All dies macht Lua zur perfekten Sprache für die Einbettung und Erweiterung von bestehender Software.
 Einige bekannte Applikationen, welche Lua für ihr Plugin-Management integrieren sind:
 
 \begin{itemize}
-  \item \textbf{Adobe Lightroom} – zur Automatisierung und Erweiterung durch Plugins
-  \item \textbf{World of Warcraft} – Add-ons und Interface-Modifikationen
-  \item \textbf{Neovim} – als Skriptsprache für Konfiguration und Plugins
+  \item \textbf{Adobe Lightroom} - zur Automatisierung und Erweiterung durch Plugins
+  \item \textbf{World of Warcraft} - Add-ons und Interface-Modifikationen
+  \item \textbf{Neovim} - als Skriptsprache für Konfiguration und Plugins
 \end{itemize}
 
-\section*{Datenstrukturen}
+\section*{Tabellen}
 
-Lua kennt nur eine Datenstruktur, die Tabelle. Eine Tabelle kann in ihrem Verhalten verschiede Datenstrukturen aus anderen Programmiersprachen wie Arrays, Records, Lists, Queues oder Sets verkörpern.
+Lua kennt nur eine Datenstruktur, die Tabelle. Eine Tabelle kann in ihrem Verhalten verschiedene Datenstrukturen aus anderen Programmiersprachen wie Arrays, Records, Lists, Queues oder Sets verkörpern.
 Bemerkenswert implementieren Tabellen alle diese Strukturen effizient.
 
-Arrays können in Lua ganz einfach durch die Indizierung von Tabellen mit Integern oder mit Hilfe von Konstruktoren implementiert werden. 
+Arrays können in Lua ganz einfach durch die Indizierung von Tabellen mit Integern oder mithilfe von Konstruktoren implementiert werden. 
 Arrays haben somit keine fest definierte Grösse, sondern wachsen nach Bedarf.
 Standardmässig haben Arrays in Lua eine 1-basierte Indizierung. 
 In unseren beiden Code-Beispielen zu Arrays (\texttt{src/table.lua}, Zeilen 1-12), sind beide Arten der Array Initialiiserung zu sehen.
@@ -96,28 +98,45 @@ Ein solches Mapping kann direkt in Lua geschrieben werden (siehe \path{src/table
 Auch Mengen (\textit{Sets}) lassen sich in Lua über Tabellen abbilden, indem man die Elemente als Schlüssel speichert und deren Wert auf \lstinline|true| setzt. 
 So lässt sich effizient prüfen, ob ein Element enthalten ist (siehe \path{src/table.lua}, Zeilen 24-33).
 
-\section*{Objekorientierte Programmierung}
+\section*{Metatabellen und Metamethoden}
+
+Lua unterstützt Metaprogrammierung durch sogenannte Metatabellen, mit denen das Verhalten von Tabellen angepasst oder erweitert werden kann.
+Metatabellen erlauben es, Operatoren zu überladen, Zugriffe auf nicht existierende Schlüssel abzufangen oder eigene Methoden für Tabellen zu definieren.
+So können z.B. Tabellen wie Objekte mit Vererbung agieren oder besondere Operationen auf Tabellen implementiert werden.
+
+In einem ersten Beispiel (siehe \path{src/meta.lua}, Zeilen 1-15) wird gezeigt, wie der Addition-Operator \colorbox{codegray}{\lstinline|+|} für Tabellen definiert werden kann. 
+Ohne Metatabellen führt \colorbox{codegray}{\lstinline|va + vb|} zu einem Laufzeitfehler, da Lua den Addition-Operator für Tabellen nicht kennt. 
+Mit einer Metatabelle, die die Metamethode \lstinline|__add| implementiert, können zwei Vektoren als Tabellen elementweise addiert werden.
+
+Auch können Metamethoden für einen Caching-Mechanismus verwendet werden (siehe \path{src/meta.lua}, Zeilen 17-29).
+Die \lstinline|__index|-Metamethode wird immer dann aufgerufen, wenn ein Schlüssel in einer Tabelle nicht vorhanden ist.
+Diese Eigenschaft kann im Beispiel der Fibonacci-Folge ausgenutzt werden. Die berechneten Werte werden in der Tabelle zwischengespeichert (Memoisierung).
+Dadurch werden bereits berechnete Werte nicht erneut berechnet, was die Effizienz deutlich steigert.
+
+\section*{Objektorientierte Programmierung}
 
 Lua unterstützt objektorientierte Konzepte, auch wenn diese nicht nativ im Sprachkern verankert sind. 
 Statt Klassen verwendet Lua Tabellen in Kombination mit Metatabellen, um ähnliche Strukturen zu modellieren.
-Tabellen können dabei einen internen Zustand (State) verwalten und durch die Verwendung des Schlüsselworts self 
-innerhalb von Funktionen auf sich selbst referenzieren - vergleichbar mit Objekten in objektorientierten Sprachen wie Java oder Python.
+Tabellen können dabei einen internen Zustand (State) verwalten und durch die Verwendung des Parameters \texttt{self} 
+innerhalb von Funktionen auf sich selbst referenzieren - vergleichbar mit der expliziten Übergabe des \texttt{self}-Parameters in Sprachen wie Rust. 
+Dies unterscheidet sich vom impliziten \texttt{this}-Schlüsselwort in objektorientierten Sprachen wie Java oder C\#.
 
-Ein einfaches Beispiel zeigt, wie Methoden in Lua mit self definiert und aufgerufen werden (siehe \path{src/oop.lua}).
-Wichtig ist: \lstinline|function Counter.new(self)| ist funktional identisch zu \lstinline|function Counter:new()| -
+Ein einfaches Beispiel zeigt, wie Methoden in Lua mit \texttt{self} definiert und aufgerufen werden (siehe \path{src/oop.lua}).
+Wichtig ist: \colorbox{codegray}{\lstinline|function Counter.new(self)|} ist funktional identisch zu \colorbox{codegray}{\lstinline|function Counter:new()|} -
 das Kolon (\texttt{:}) vor dem Funktionsnamen sorgt dafür, dass das Objekt automatisch als erster Parameter (\texttt{self}) 
 übergeben wird und damit eine Methode im klassischen Sinn emuliert wird.
 
 \section*{Funktionale Programmierung}
 
-Lua unterstützt funktionale Programmierparadigmen. Funktionen sind in Lua \textit{first-class} values, das heisst, 
+Lua unterstützt ebenfalls funktionale Programmierparadigmen. Funktionen sind in Lua \textit{first-class values}, das heisst, 
 sie können wie beliebige andere Werte behandelt werden: Sie lassen sich Variablen zuweisen, als Argumente übergeben 
-oder als Rückgabewerte verwenden (siehe \path{src/functional.lua}, Zeilen 1-3). Dadurch lassen sich Funktionen höherer Ordnung realisieren.
+oder als Rückgabewerte verwenden (siehe \path{src/functional.lua}, Zeilen 1-3). Dadurch können Funktionen höherer Ordnung realisiert werden.
 
 Auch anonyme Funktionen (Lambdas) werden unterstützt, was eine kompakte Schreibweise für einfache Ausdrücke ermöglicht (siehe \path{src/functional.lua}, Zeilen 5-6).
 
 Ein weiteres zentrales Konzept der funktionalen Programmierung, das von Lua unterstützt wird, sind \textit{Closures}. 
 Diese erlauben es Funktionen, auf Variablen aus ihrer umgebenden Sphäre zuzugreifen und deren Werte auch nach dem ursprünglichen Gültigkeitsbereich weiterzunutzen (siehe \path{src/functional.lua}, Zeilen 8-16).
+Im Unterschied zu \textit{Clojure} kann die Funktion in Lua jedoch ganz normal aufgerufen werden – fehlende Parameter werden dabei einfach mit \texttt{nil} vorbelegt.
 
 \section*{Rekursion \& Tailrekursion}
 
@@ -146,18 +165,14 @@ Ein typisches Anwendungsbeispiel zeigt, wie eine Coroutine nach jedem Berechnung
 In der gezeigten Funktion wird eine Zählschleife ausgeführt, wobei nach jedem Durchlauf ein \lstinline|coroutine.yield()| die Ausführung unterbricht. 
 Die Coroutine wird anschliessend in einer Schleife mit \lstinline|coroutine.resume()| Schritt für Schritt weitergeführt, bis diese beendet ist.
 
-\section*{Metaprogrammierung}
+\section*{Fazit}
 
-Lua unterstützt Metaprogrammierung durch sogenannte Metatabellen, mit denen das Verhalten von Tabellen angepasst oder erweitert werden kann.
-Metatabellen erlauben es, Operatoren zu überladen, Zugriffe auf nicht existierende Schlüssel abzufangen oder eigene Methoden für Tabellen zu definieren.
-So können Tabellen z.B. wie Objekte mit Vererbung agieren oder besondere Operationen auf Tabellen implementiert werden.
+\subsection*{Persönliches Fazit - Rafael Uttinger}
+Diese Arbeit hat mir die Vielseitigkeit und Leichtgewichtigkeit von Lua gezeigt. 
+Besonders spannend fand ich, wie Lua mit wenigen, aber mächtigen Konzepten wie Tabellen, Metatabellen und Closures komplexe Paradigmen umsetzen kann. 
 
-Im ersten Beispiel (siehe \path{src/metatables.lua}, Zeilen 1-18) wird gezeigt, wie das Addition-Operator \lstinline|+| für Tabellen definiert werden kann. 
-Ohne Metatabellen führt \lstinline|va + vb| zu einem Laufzeitfehler, da Lua den Operator für Tabellen nicht kennt. 
-Mit einer Metatabelle, die die Metamethode \lstinline|__add| implementiert, können zwei Vektoren als Tabellen elementweise addiert werden.
-
-Das zweite Beispiel (siehe \path{src/metatables.lua}, Zeilen 20–40) illustriert die Verwendung von \lstinline|__index| für einen Caching-Mechanismus. 
-Hier wird die Fibonacci-Folge rekursiv berechnet und Zwischenergebnisse werden in der Tabelle zwischengespeichert. 
-Dadurch müssen Werte nicht mehrfach berechnet werden, was die Effizienz deutlich erhöht.
+Die Umsetzung der Beispiele und insbesondere das Umdenken in eine neue Sprache war durch das gut dokumentierte Referenzhandbuch relativ schmerzlos ;). 
+Insgesamt sehe ich Lua in ihrem Anwendungsbereich, als gute Wahl einer Skriptsprache um etwas auszuprobieren, jedoch habe ich den Verdacht, 
+dass bei komplexeren Problemen die Einfachheit von Lua im Weg steht. 
 
 \end{document}
