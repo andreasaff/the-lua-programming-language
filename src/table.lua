@@ -41,49 +41,40 @@ print("literal_key :", map.literal_key)
 print("an expression", map["an expression"])
 
 -- Stack (an object)
-Stack = {}
-
-function Stack:init()
-    local s = {}
-    setmetatable(s, self)
-    self.__index = self
-    return s
-end 
-
-function Stack:push(v)
-    table.insert(self, v)
+local function Stack()
+    return {
+        s = {},
+        push = function(self, v)
+            table.insert(self.s, v)
+        end,
+        pop = function(self)
+            return table.remove(self.s)
+        end,
+        top = function(self)
+            return self.s[#self.s]
+        end,
+        isEmpty = function(self)
+            return #self.s == 0
+        end,
+        size = function(self)
+            return #self.s
+        end,
+        print = function(self)
+            print(table.unpack(self.s))
+        end
+    }
 end
 
-function Stack:pop()
-    return table.remove(self)
-end
+stack = Stack()
+print("size:", stack:size())
+print("isEmpty", stack:isEmpty())
+stack:print()
+print("top:", stack:top())
 
-function Stack:top()
-    return self[#self]
-end
+stack:push(42)
+stack:push(77)
+stack:push(1)
 
-function Stack:isEmpty()
-    return #self == 0
-end
-
-function Stack:size()
-    return #self
-end
-
-function Stack:print()
-    print(table.unpack(self))
-end
-
-s = Stack:init()
-print("size:", s:size())
-print("isEmpty", s:isEmpty())
-s:print()
-print("top:", s:top())
-
-s:push(42)
-s:push(77)
-s:push(1)
-
-print("size:", s:size())
-print("isEmpty", s:isEmpty())
-s:print()
+print("size:", stack:size())
+print("isEmpty", stack:isEmpty())
+stack:print()
