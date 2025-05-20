@@ -1,10 +1,4 @@
--- Code from the # Metatables & Metamethods slides
--- Try adding up two tables
-va = {1, 2, 4}
-vb = {2, 4, 3}
--- local vr = va + vb  (while lead to a runtime error if uncommented)
-
--- Add up two metatables with __add defined
+-- Beispiel 1: Operatorüberladung für Addition von Vektoren
 local vec_add_mt = {}
 vec_add_mt.__add = function(left, right)
   return setmetatable({
@@ -14,24 +8,22 @@ vec_add_mt.__add = function(left, right)
   }, vec_add_mt)
 end
 
-local vc = setmetatable({ 1, 2, 4}, vec_add_mt)
-local vd = setmetatable({ 2, 4, 3}, vec_add_mt)
+local vc = setmetatable({1, 2, 4}, vec_add_mt)
+local vd = setmetatable({2, 4, 3}, vec_add_mt)
 
 local vr = vc + vd
-print(vr[1], vr[2], vr[3])
+print(vr[1], vr[2], vr[3]) -- Ausgabe: 3 6 7
 
--- Usecase recursive fibbonacci calculation with caching
+-- Beispiel 2: Rekursive Fibonacci-Berechnung mit Caching
 local fib_mt = {
   __index = function(self, key)
     if key <= 2 then return 1 end
-    -- calculate new fib values from already cached ones
-    self[key] = self[key -2] + self[key - 1]
-    -- return current fib
+    self[key] = self[key - 2] + self[key - 1]
     return self[key]
   end
 }
 
 local fib = setmetatable({}, fib_mt)
 
-print(fib[5])
-print(fib[100])
+print(fib[5])   -- Ausgabe: 5
+print(fib[100]) -- Ausgabe: 3736710778780434371
