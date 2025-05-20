@@ -280,6 +280,9 @@ coroutine.status(co)
 transition: slide-left
 ---
 # Summary & Conclusion
+- The "everything is a table" concept takes time to get used to, not intuitive from the beginning
+- Solid language which deserves it's place
+- Typical Usecase scenario rather niche, but in it's domain Lua is very strong
 
 ---
 transition: slide-left
