@@ -230,7 +230,7 @@ print(vr[1], vr[2])
 ---
 transition: slide-left
 ---
-Rekursive Fibbonaci-Berechnung mit Caching
+Rekursive Fibbonaci-Berechnung mit Memoization 
 ```lua {monaco-run}
 local fib_mt = {
   __index = function(self, key)

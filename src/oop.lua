@@ -1,4 +1,4 @@
--- Simple object with method using 'self'
+-- Simple object with method using 'self' (Bericht)
 local Counter = {}
 Counter.__index = Counter
 

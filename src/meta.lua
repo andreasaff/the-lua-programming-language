@@ -1,4 +1,4 @@
--- Beispiel 1: Operatorüberladung für Addition von Vektoren
+-- Beispiel 1: Operatorüberladung für Addition von Vektoren (Slides)
 local vec_add_mt = {}
 vec_add_mt.__add = function(left, right)
   return setmetatable({
@@ -14,7 +14,7 @@ local vd = setmetatable({2, 4, 3}, vec_add_mt)
 local vr = vc + vd
 print(vr[1], vr[2], vr[3]) -- Ausgabe: 3 6 7
 
--- Beispiel 2: Rekursive Fibonacci-Berechnung mit Caching
+-- Beispiel 2: Rekursive Fibonacci-Berechnung mit Memoization (Slides)
 local fib_mt = {
   __index = function(self, key)
     if key <= 2 then return 1 end

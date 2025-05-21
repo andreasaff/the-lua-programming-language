@@ -1,4 +1,4 @@
--- Array
+-- Array (Slides)
 -- 1. Beispiel: Array mit Konstruktor
 local array = {"first", 2, false, function() print("Fourth!") end }
 print("1-based indexes!:", array[1])
@@ -11,7 +11,7 @@ a = {}    -- new array
       a[i] = 0
     end
 
--- Dictionary
+-- Dictionary (Bericht)
 -- Beispiel: Mapping von Länder zu Städte
 local capitals = {
     Germany = "Berlin",
@@ -21,7 +21,7 @@ local capitals = {
   
 print("Capital of France is " .. capitals["France"])
 
--- Set
+-- Set (Bericht)
 -- Beispiel: Mengen-Darstellung mit Tabelle
 local fruits = {
     apple = true,
@@ -32,7 +32,7 @@ local fruits = {
   print("Is apple in the set?", fruits["apple"] ~= nil)   -- true
   print("Is orange in the set?", fruits["orange"] ~= nil) -- false
 
--- Map
+-- Map (Slides)
 local map = {
   literal_key = "a string",
   ["an expression"] = "also works"
@@ -40,7 +40,7 @@ local map = {
 print("literal_key :", map.literal_key)
 print("an expression", map["an expression"])
 
--- Stack (an object)
+-- Einstieg W01 - Stack (Objekt) (Slides)
 local function Stack()
     return {
         s = {},

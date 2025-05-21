@@ -1,6 +1,4 @@
--- Code from the # Basics slide
-
--- Definitions & Types
+-- Definitionen & Typen (Slides)
 local number = 5
 
 local string = "hello world!"
@@ -12,7 +10,7 @@ local table = {}
 
 local emptiness = nil
 
--- Firstclass functions
+-- Funktionen erster Klasse (Slides)
 function greet(name)
   print("Hello, " .. name .. "!")
 end

@@ -1,16 +1,16 @@
--- 1. Beispiel: Rekursion mit tail call
-function fact(n, acc)
+-- 1. Beispiel: Rekursion mit tail call (Bericht)
+function fac(n, acc)
     acc = acc or 1
     if n == 0 then
       return acc
     else
-      return fact(n - 1, n * acc)
+      return fac(n - 1, n * acc)
     end
   end
   
-print(fact(5)) -- Ausgabe: 120
+print(fac(5)) -- Ausgabe: 120
 
--- 2. Beispiel: Rekursion mit verberten property lookups
+-- 2. Beispiel: Rekursion mit vererbten property lookups (Bericht)
 function create_nested_lookup(level)
     if level == 0 then
       return { value = "default" }

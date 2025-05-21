@@ -1,11 +1,11 @@
--- Funktion als Wert zuweisen
+-- Funktion als Wert zuweisen (Bericht)
 local f = function (x, y) return x + y end
 print(f(2, 3)) -- prints 5
 
--- Anonyme Funktion (Lambda) direkt aufrufen
+-- Anonyme Funktion (Lambda) direkt aufrufen (Bericht)
 print((function(x, y) return x * y end)(3, 4)) -- prints 12
 
--- Closure, das eine Umgebung "einfängt"
+-- Closure, das eine Umgebung "einfängt" (Bericht)
 function make_adder(x)
     return function(y)
       return x + y
