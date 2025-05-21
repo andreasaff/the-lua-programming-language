@@ -53,12 +53,15 @@ transition: slide-left
 # Lua
 
 - „Mond“ auf Portugiesisch
-- Entwickelt vom _Tecgrafinstitut_ der PUC-Rio
+- Entwickelt vom _Tecgraf Institut_ der PUC-Rio
 - Veröffentlicht im Jahr 1993
 - Neueste stabile Version: v5.4.7 – Juni 2024
 - Kompiliert in Bytecode und läuft auf dem Lua-Interpreter
 - Extrem leichtgewichtig (offizieller Tarball der Version 5.4.7 wiegt nur 1,3 MB!)
-- Häufige Anwendungsgebiete: industrielle Anwendungen (Lightroom), eingebettete Systeme, Spiele
+- Häufige Anwendungsgebiete: 
+  - industrielle Anwendungen (Lightroom)
+  - eingebettete Systeme
+  - Addons für Spiele (WoW, Roblox, etc.)
   <br>
   <br>
 
@@ -194,14 +197,15 @@ transition: slide-left
 # Metatabellen & Metamethoden
 Metamethoden überschrieben das Standardverhalten von Tabellen.
 
+Beispiel einer Vektor-Addition:
+
 ```lua {monaco-run}{ editorOptions: { fontSize:11} }
 va = {1, 2}
 vb = {2, 4}
 local vr = va + vb
 ```
 
-Vektor Addition 
-```lua {monaco-run}{ editorOptions: { fontSize:11} }
+```lua {monaco-run}{ editorOptions: { fontSize:10} }
 local vec_add_mt = {}
 vec_add_mt.__add = function(left, right)
   return setmetatable({
@@ -216,6 +220,13 @@ local vd = setmetatable({ 2, 4}, vec_add_mt)
 local vr = vc + vd
 print(vr[1], vr[2])
 ```
+
+<!--
+- Metamethoden ermöglichen Operator-Overloading für Tabellen (__add), Default-Methode bei fehlendem Indexing (__index)
+- erstes Beispiel: Addition zweier Vektoren mittels __add metamethode, metatabelle wird auf tabelle geschrieben
+- So können zwei Tabellen als Vektoren interpretiert und mit + addiert werden.
+-->
+
 ---
 transition: slide-left
 ---
@@ -234,8 +245,16 @@ local fib_mt = {
 local fib = setmetatable({}, fib_mt)
 
 print(fib[5])
-print(fib[100])
+print(fib[90])
 ```
+
+<!--
+- Metatabelle mit __index, um Werte zu cachen (Memoization).
+- self[key] noch nicht gesetzt? -> __index
+- Das Caching vermeidet exponentielle Rekursion und sorgt für schnelle Zugriffe.
+- Höhere Zahlen können nicht zuverlässig ausgegeben werden, da Lua-Nummern als 64-Bit-Gleitkommazahlen (double) intern gespeichert werden.
+- Ab ca. Index 92 überschreiten Fibonacci-Zahlen die maximale präzise Ganzzahldarstellung von Lua, was zu Rundungsfehlern führt.
+-->
 
 ---
 transition: slide-left
@@ -250,6 +269,17 @@ Koroutinen haben drei verschiedene Zustände:
 - running
 - dead
 
+<!--
+- Koroutinen = unterbrechbare Funktionen
+- laufen auf einem Thread (keine echte Parallelität)
+- kooperatives Multitasking via `yield`
+- explizites Pausieren und Fortsetzen mit `resume`
+- praktisch für z. B. Animationen, Parser, asynchrone Abläufe
+- Zustände:
+  - suspended: pausiert oder bereit
+  - running: aktiv (nur eine gleichzeitig)
+  - dead: beendet, nicht wieder aufnehmbar
+-->
 
 ---
 transition: slide-left
@@ -270,6 +300,16 @@ print("123 from the main thread")
 coroutine.resume(co)
 coroutine.status(co)
 ```
+
+<!--
+- `coroutine.create` erzeugt eine neue Koroutine im Zustand "suspended"
+- `coroutine.resume` startet oder setzt die Koroutine fort
+- `coroutine.yield` unterbricht die Ausführung freiwillig
+- Kontrolle wechselt zurück zum Hauptprogramm
+- Beispiel zeigt wechselseitigen Ablauf zwischen Koroutine und Hauptthread
+- `coroutine.status` zeigt aktuellen Zustand: "suspended", "running", "dead"
+-->
+
 ---
 transition: slide-left
 ---

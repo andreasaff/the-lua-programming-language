@@ -155,15 +155,15 @@ Dies erlaubt z.B. vererbte Property-Lookups über verschachtelte \texttt{\_\_ind
 Lua-Code wird in einem einzelnen Thread ausgeführt, wodurch echte Parallelität über mehrere Threads hinweg nicht nativ unterstützt wird. 
 Es existieren jedoch Lua-Threading-Module, die Multithreading ermöglichen, indem sie pro Thread eine separate Lua-Instanz verwenden.
 
-Statt echter Nebenläufigkeit bietet Lua das Konzept der Coroutinen als leichtgewichtige Alternative. 
-Coroutinen sind Funktionen, die in einem speziellen Ausführungskontext laufen und explizit pausiert sowie fortgesetzt werden können. 
+Statt echter Nebenläufigkeit bietet Lua das Konzept der Koroutinen als leichtgewichtige Alternative. 
+Koroutinen sind Funktionen, die in einem speziellen Ausführungskontext laufen und explizit pausiert sowie fortgesetzt werden können. 
 Sie sind kooperativ (non-preemptive), das heisst, sie werden nicht vom Scheduler unterbrochen, sondern müssen die Kontrolle aktiv zurückgeben. 
-An definierten Stellen können sie ihren aktuellen Zustand speichern und die Ausführung unterbrechen, um anderen Coroutinen Rechenzeit zu überlassen. 
+An definierten Stellen können sie ihren aktuellen Zustand speichern und die Ausführung unterbrechen, um anderen Koroutinen Rechenzeit zu überlassen. 
 Durch dieses kontrollierte Wechselspiel entsteht der Eindruck echter Parallelität - innerhalb eines einzelnen Threads.
 
-Ein typisches Anwendungsbeispiel zeigt, wie eine Coroutine nach jedem Berechnungsschritt bewusst pausiert und später fortgesetzt werden kann (siehe \path{src/coroutines.lua}, Beispiel 2). 
+Ein typisches Anwendungsbeispiel zeigt, wie eine Koroutine nach jedem Berechnungsschritt bewusst pausiert und später fortgesetzt werden kann (siehe \path{src/coroutines.lua}, Beispiel 2). 
 In der gezeigten Funktion wird eine Zählschleife ausgeführt, wobei nach jedem Durchlauf ein \lstinline|coroutine.yield()| die Ausführung unterbricht. 
-Die Coroutine wird anschliessend in einer Schleife mit \lstinline|coroutine.resume()| Schritt für Schritt weitergeführt, bis diese beendet ist.
+Die Koroutine wird anschliessend in einer Schleife mit \lstinline|coroutine.resume()| Schritt für Schritt weitergeführt, bis diese beendet ist.
 
 \section*{Fazit}
 

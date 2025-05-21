@@ -26,4 +26,4 @@ local fib_mt = {
 local fib = setmetatable({}, fib_mt)
 
 print(fib[5])   -- Ausgabe: 5
-print(fib[100]) -- Ausgabe: 3736710778780434371
+print(fib[90])  -- Ausgabe: 2880067194370816120
