@@ -85,13 +85,13 @@ transition: slide-left
 
 # Language Concepts
 - Lua is dynamically typed
-- Lua is Multi-Paradigm - Imperative (Procedural, Objectoriented), Functional
+- Lua is Multi-Paradigm - procedural, object-oriented, functional and data-driven
 - Lua uses "Mechanisms over Policies" 
 - In Lua the only complex datatype is a table - everything is derived from there
 - Lua is cool 😄
 
 <!--
-Mechanisms over Policies -> Wenig Keywords (nur 21) aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
+Mechanisms over Policies -> Wenig Keywords (nur 22) aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
 -->
 
 ---
@@ -132,7 +132,8 @@ Array
 ```lua {monaco-run}
 local array = {"first", 2, false, function() print("Fourth!") end }
 print("Oh-yeah 1-based indexes!:", array[1])
-print("Fourth is:", array[4]())
+print("Fourth is:")
+array[4]()
 ```
 
 Map
@@ -230,7 +231,7 @@ print(vr[1], vr[2], vr[3])
 ---
 transition: slide-left
 ---
-Recursive Fibbonaci calculation with caching
+Recursive Fibonacci calculation with caching
 ```lua {monaco-run}
 local fib_mt = {
   __index = function(self, key)
@@ -255,7 +256,7 @@ transition: slide-left
 Lua uses Coroutines as it's concurrency model.
 Everything is executed on a single Hardware Thread. 
 
-Coroutines can `yield` (voluntarily pause) there execution (non-preemtive multithreading), giving the illusion of true parallelism.
+Coroutines can `yield` (voluntarily pause) there execution (non-preemptive multithreading), giving the illusion of true parallelism.
 
 Coroutines can be in one of three states:
 - suspended
@@ -297,8 +298,8 @@ transition: slide-left
 ---
 # Personal Conclusion Andreas
 - Practical language that's quite simple 
-- Working with one datastructure that represents everything is quite interesting
-- Will definitly use it again (Neovim config)
+- Working with one data structure that represents everything is quite interesting
+- Will definitely use it again (Neovim config)
 - Maybe also tinker around with Lua during next AoC
 - Lua manual gets you up and running quite fast (https://www.lua.org/manual/5.4/)
 
