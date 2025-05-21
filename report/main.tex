@@ -108,7 +108,7 @@ In einem ersten Beispiel (siehe \path{src/meta.lua}, Zeilen 1-15) wird gezeigt, 
 Ohne Metatabellen führt \colorbox{codegray}{\lstinline|va + vb|} zu einem Laufzeitfehler, da Lua den Addition-Operator für Tabellen nicht kennt.
 Mit einer Metatabelle, die die Metamethode \lstinline|__add| implementiert, können zwei Vektoren als Tabellen elementweise addiert werden.
 
-Auch können Metamethoden für einen Caching-Mechanismus verwendet werden (siehe \path{src/meta.lua}, Zeilen 17-29).
+Auch können Metamethoden für einen Caching-Mechanismus verwendet werden (siehe \path{src/meta.lua}, Zeilen 17-29 und 31-44).
 Die \lstinline|__index|-Metamethode wird immer dann aufgerufen, wenn ein Schlüssel in einer Tabelle nicht vorhanden ist.
 Diese Eigenschaft kann im Beispiel der Fibonacci-Folge ausgenutzt werden. Die berechneten Werte werden in der Tabelle zwischengespeichert (Memoisierung).
 Dadurch werden bereits berechnete Werte nicht erneut berechnet, was die Effizienz deutlich steigert.
@@ -178,7 +178,7 @@ Die Umsetzung der Beispiele und insbesondere das Umdenken in eine neue Sprache w
 Insgesamt sehe ich Lua in ihrem Anwendungsbereich, als gute Wahl einer Skriptsprache um etwas auszuprobieren, jedoch habe ich den Verdacht,
 dass bei komplexeren Problemen die Einfachheit von Lua im Weg steht.
 
-\subsection{Persönliches Fazit - Andreas Affentranger}
+\subsection*{Persönliches Fazit - Andreas Affentranger}
 Ich fand den Einblick in Lua sehr spannend. Durch die wenigen Keywords wirkt die Sprache übersichtlich und elegant. Sehr viele der In PCP behandelten Konzepte sind auch in Lua
 wiederzufinden. Das Konzept das sämtliche Datenstrukturen aus Tabellen abgebildet werden, ist etwas ungewohnt und einer meiner einzigen Kritikpunkte an der Sprache, ich denke zusätzliche nativ implementierte Datenstrukturen
 würden die Sprache noch intuitiver und vielseitger einsetzbar machen. Persönlich werde ich Lua für meine Neovim Konfiguration verwenden.
