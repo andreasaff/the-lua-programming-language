@@ -79,9 +79,9 @@ transition: slide-left
 
 # Sprachkonzepte
 - Lua ist dynamisch typisiert.
-- Lua ist multiparadigmatisch – prozedural, objektorientiert, funktional & daten gesteuert.
+- Lua ist eine multiparadigma Sprache – prozedural, objektorientiert, funktional & daten gesteuert.
 - Lua verwendet „Mechanismen statt Richtlinien“.
-- In Lua ist der einzige komplexe Datentyp eine Tabelle – alles wird von dort abgeleitet.
+- In Lua kennt als einzigen komplexe Datentyp Tabelle – alles wird von dort abgeleitet.
 
 <!--
 Mechanismen statt Richtlinien -> Wenig Keywords (nur 22) aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
@@ -120,7 +120,7 @@ sayHello("Alice")
 transition: slide-left
 ---
 # Tabelle
-In Lua sind <span v-mark.red="1">Tabellen die einzigen komplexen Datenstrukturen</span>. Array, Map, Objekt, etc. in einem.
+In Lua ist <span v-mark.red="1">die Tabelle die einzigen komplexen Datenstruktur</span>. Array, Map, Objekt, etc. in einem.
 
 Array
 ```lua {monaco-run}
@@ -332,10 +332,10 @@ transition: slide-left
 ---
 # Persönliches Fazit Andreas
 - Praktische Sprache mit einer recht einfachen Syntax
-- Mit nur einer Datenstruktur zu arbeiten, die alles repräsentiert, ist durchaus interessant
-- Werde sie definitiv wieder verwenden (z. B. für die Neovim-Konfiguration)
-- Vielleicht probiere ich Lua auch beim nächsten Advent of Code aus
-- Das Lua-Handbuch bringt einen schnell zum Laufen: https://www.lua.org/manual/5.4/
+- Mit nur einer Datenstruktur zu arbeiten, die alles repräsentiert, ist durchaus interessant, erfordert jedoch auch umdenken
+- Persönliche Anwendungsbereiche: Neovim-Konfiguration
+- Neben Go die Sprache, welche gerne mal für Adven of Code verwenden würde.
+- Lua Pills & Dokumentation bieten einen schnellen Einstieg: https://www.lua.org/manual/5.4/
 
 ---
 transition: slide-left
