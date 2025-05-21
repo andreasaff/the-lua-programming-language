@@ -14,7 +14,7 @@ The _Requirements_ reflect the versions this project was developed and tested on
 
 _Requirements_
 
-- lua 5.2.4 or higher
+- lua 5.2.4 or higher (https://luabinaries.sourceforge.net/download.html)
 
 Run lua snippets:
 
@@ -27,8 +27,8 @@ lua <snippet-name>.lua
 
 _Requirements_
 
-- node v22.14.0 or higher
-- yarn 1.22.22 or higher
+- node v22.14.0 or higher (https://nodejs.org/en/download)
+- yarn 1.22.22 or higher (https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
 - slidev 51.6.0 (via package.json)
 - lua-http v0.4 (via luarocks)
 
@@ -60,7 +60,7 @@ Slides are served on http://localhost:3030
 
 _Requirements_
 
-- pdfTeX 3.141592653-2.6-1.40.26 or higher
+- pdfTeX 3.141592653-2.6-1.40.26 or higher (https://www.tug.org/interest.html#free)
 
 Generate the pdf file locally:
 
