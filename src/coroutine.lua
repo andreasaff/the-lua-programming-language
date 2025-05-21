@@ -16,3 +16,34 @@ while coroutine.status(co) ~= "dead" do
 end
 
 print("Coroutine has finished.")
+
+-- Clojure W02, Nr. 1 --
+-- a)
+function filterEven(numbers)
+  return coroutine.wrap(function()
+    for _, n in ipairs(numbers) do
+      if n % 2 == 0 then
+        coroutine.yield(n)
+      end
+    end
+  end)
+end
+
+for n in filterEven({1, 2, 3, 4, 5, 6}) do
+  print(n) -- 1, 3, 5
+end
+
+-- b)
+function filter(pred, collection)
+  return coroutine.wrap(function()
+    for _, item in ipairs(collection) do
+      if pred(item) then
+        coroutine.yield(item)
+      end
+    end
+  end)
+end
+
+for n in filter(function(x) return x % 2 == 0 end, {1, 2, 3, 4, 5, 6}) do
+  print(n) -- 2, 4, 6
+end

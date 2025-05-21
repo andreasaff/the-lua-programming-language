@@ -28,11 +28,7 @@ mdc: true
 
 # Lua
 
-Presentation by Andreas Affentranger & Rafael Uttinger
-
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
-</div>
+Präsentation von Andreas Affentranger & Rafael Uttinger
 
 <div class="abs-br m-6 text-xl">
   <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
@@ -54,20 +50,19 @@ h1 {
 transition: slide-left
 ---
 
-# The Language
+# Lua
 
-- Portuguese for moon
-- Designed by members of the _Tecgraf_ department @ Pontifical Catholic University of Rio de Janeiro
-- Initial Release: 1993
-- Latest Stable Release: v5.4.7 - June 2024
-- Compiles to bytecode & runs on the lua interpreter
-- Extremly lightweight (offical v5.4.7 tarball weights in at just 1.3MB!)
-- Common fields of application: Game Development, Embedded Systems, Plugin Ecosystems
-
+- „Mond“ auf Portugiesisch
+- Entwickelt vom _Tecgrafinstitut_ der PUC-Rio
+- Veröffentlicht im Jahr 1993
+- Neueste stabile Version: v5.4.7 – Juni 2024
+- Kompiliert in Bytecode und läuft auf dem Lua-Interpreter
+- Extrem leichtgewichtig (offizieller Tarball der Version 5.4.7 wiegt nur 1,3 MB!)
+- Häufige Anwendungsgebiete: industrielle Anwendungen (Lightroom), eingebettete Systeme, Spiele
   <br>
   <br>
 
-Read more about [Lua Docs](https://www.lua.org/home.html)
+<!-- Mehr auf [Lua Docs](https://www.lua.org/home.html) -->
 
 <!--
 - Lua Interpreter in ca. 31K Lines C geschrieben
@@ -79,23 +74,22 @@ Read more about [Lua Docs](https://www.lua.org/home.html)
 transition: slide-left
 ---
 
-# Language Concepts
-- Lua is dynamically typed
-- Lua is Multi-Paradigm - procedural, object-oriented, functional and data-driven
-- Lua uses "Mechanisms over Policies" 
-- In Lua the only complex datatype is a table - everything is derived from there
-- Lua is cool 😄
+# Sprachkonzepte
+- Lua ist dynamisch typisiert.
+- Lua ist multiparadigmatisch – prozedural, objektorientiert, funktional & daten gesteuert.
+- Lua verwendet „Mechanismen statt Richtlinien“.
+- In Lua ist der einzige komplexe Datentyp eine Tabelle – alles wird von dort abgeleitet.
 
 <!--
-Mechanisms over Policies -> Wenig Keywords (nur 22) aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
+Mechanismen statt Richtlinien -> Wenig Keywords (nur 22) aus welchem wir Strukturen zusammenbauen können, anstelle von dedizierten Keywords.
 -->
 
 ---
 transition: slide-left
 ---
-# Basics
+# Grundlagen
 
-Simple Literals
+Einfache Literale
 ```lua 
 local number = 5
 
@@ -109,7 +103,7 @@ local table = {}
 local emptiness = nil
 ```
 
-Functions are first class citizen
+Funktionen sind von erster Klasse
 ```lua {monaco-run}
 function greet(name)
   print("Hello, " .. name .. "!")
@@ -122,8 +116,8 @@ sayHello("Alice")
 ---
 transition: slide-left
 ---
-# Table
-In Lua <span v-mark.red="1">tables are the only complex datatype</span>. Array, Dictionary & Object all in one.
+# Tabelle
+In Lua sind <span v-mark.red="1">Tabellen die einzigen komplexen Datenstrukturen</span>. Array, Map, Objekt, etc. in einem.
 
 Array
 ```lua {monaco-run}
@@ -146,7 +140,7 @@ print("an expression", map["an expression"])
 ---
 transition: slide-left
 ---
-Stack (Object)
+Stack (Objekt)
 ```lua {monaco-run}{ editorOptions: { fontSize:9} }
 local function Stack()
     return {
@@ -197,8 +191,8 @@ stack:print()
 ---
 transition: slide-left
 ---
-# Metatables & Metamethods
-Metamethods override the default behaviour of tables.
+# Metatabellen & Metamethoden
+Metamethoden überschrieben das Standardverhalten von Tabellen.
 
 ```lua {monaco-run}{ editorOptions: { fontSize:11} }
 va = {1, 2}
@@ -206,7 +200,7 @@ vb = {2, 4}
 local vr = va + vb
 ```
 
-Vector Addition 
+Vektor Addition 
 ```lua {monaco-run}{ editorOptions: { fontSize:11} }
 local vec_add_mt = {}
 vec_add_mt.__add = function(left, right)
@@ -225,7 +219,7 @@ print(vr[1], vr[2])
 ---
 transition: slide-left
 ---
-Recursive Fibonacci calculation with caching
+Rekursive Fibbonaci-Berechnung mit Caching
 ```lua {monaco-run}
 local fib_mt = {
   __index = function(self, key)
@@ -246,13 +240,12 @@ print(fib[100])
 ---
 transition: slide-left
 ---
-# Coroutines
-Lua uses Coroutines as it's concurrency model.
-Everything is executed on a single Hardware Thread. 
+# Koroutinen
+Lua verwendet Koroutinen für kooperative Nebenläufigkeit – nicht für echte Parallelität. Alle Ausführungen laufen auf einem einzigen Thread.
 
-Coroutines can `yield` (voluntarily pause) there execution (non-preemptive multithreading), giving the illusion of true parallelism.
+Koroutinen können ihre Ausführung freiwillig unterbrechen (`yield`), als Form von kooperativem Multitasking. Dadurch entsteht die Illusion von echter Parallelität, obwohl alles sequentiell auf einem Thread läuft.
 
-Coroutines can be in one of three states:
+Koroutinen haben drei verschiedene Zustände:
 - suspended
 - running
 - dead
@@ -261,7 +254,7 @@ Coroutines can be in one of three states:
 ---
 transition: slide-left
 ---
-Coroutine Example
+Beispiel einer Koroutine
 ```lua {monaco-run} 
 co = coroutine.create(function ()
   for i=1,2 do 
@@ -280,37 +273,36 @@ coroutine.status(co)
 ---
 transition: slide-left
 ---
-# Summary & Conclusion
-- The "everything is a table" concept takes time to get used to, not intuitive from the beginning
-- Solid language which deserves it's place
-- Typical Usecase scenario rather niche, but in it's domain Lua is very strong
+# Zusammenfassung & Fazit
+- Das Konzept „Alles ist eine Tabelle“ ist anfangs wenig intuitiv und braucht etwas Zeit, bis man es verinnerlicht.
+- Lua ist eine solide, schlanke Sprache, die ihren Platz in ihrer Domäne verdient.
+- Auch wenn die Anwedungsfälle rar sind, ist Lua in seinem Einsatzbereich sehr weit ausgebreitet (meist benutzte Skriptsprache in eingebetteten Systemen)
 
 ---
 transition: slide-left
 ---
-# Personal Conclusion Rafael
-- Language is well-documented and actively maintained
-- Easy to understand core concepts
-- Established within its domain as lightweight extension language
-- Might use it again for scripting purposes like add-ons or configs
-- Limitations are minor and understandable given its use case and minimalist philosophy
+# Persönliches Fazit Rafael
+- Die Sprache ist gut dokumentiert und wird aktiv gepflegt
+- Die zentralen Konzepte sind leicht verständlich
+- In ihrem Anwendungsbereich als schlanke Erweiterungssprache etabliert
+- Erste Wahl für Scripting-Zwecke wie Add-ons oder Konfigurationen
 
 ---
 transition: slide-left
 ---
-# Personal Conclusion Andreas
-- Practical language that's quite simple 
-- Working with one data structure that represents everything is quite interesting
-- Will definitely use it again (Neovim config)
-- Maybe also tinker around with Lua during next AoC
-- Lua manual gets you up and running quite fast (https://www.lua.org/manual/5.4/)
+# Persönliches Fazit Andreas
+- Praktische Sprache mit einer recht einfachen Syntax
+- Mit nur einer Datenstruktur zu arbeiten, die alles repräsentiert, ist durchaus interessant
+- Werde sie definitiv wieder verwenden (z. B. für die Neovim-Konfiguration)
+- Vielleicht probiere ich Lua auch beim nächsten Advent of Code aus
+- Das Lua-Handbuch bringt einen schnell zum Laufen: https://www.lua.org/manual/5.4/
 
 ---
 transition: slide-left
 layout: center
 class: text-center
 ---
-# Thanks for joining us along the ride!
+# Danke fürs Dabeisein! :)
 
 [GitHub](https://github.com/andreasaff/the-lua-programming-language)
 
